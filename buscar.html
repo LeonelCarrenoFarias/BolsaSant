@@ -24,13 +24,6 @@
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $('input.star').rating();
-        });
-    </script>
-
-
 </head>
 
 <body>
@@ -39,7 +32,7 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class=" menu-item"><a href="grafico.html"><i style="margin-top: -2px;" class="menu-icon fa fa-dashboard fa-2x" ></i>Indicadores Graficos</a></li><!-- /.menu-title -->
+                    <li class=" menu-item"><a href="index.html"><i style="margin-top: -2px;" class="menu-icon fa fa-dashboard fa-2x" ></i>Indicadores Graficos</a></li><!-- /.menu-title -->
                     <li class="active menu-item"><a href="buscar.html"><i style="margin-top: -2px;" class="menu-icon fa fa-search fa-2x" ></i>Indices</a></li><!-- /.menu-title -->
 
                 </ul>
@@ -60,6 +53,7 @@
         <!-- Content -->
         <div class="content">
             <!-- Animated -->
+
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
@@ -71,27 +65,29 @@
                                     <div class="col col-md-3">
                                     </div>
                                     <div class="col col-md-6">
-                                        <label for="busqueda">Seleccione el indicador: </label>
+                                        <form>
+                                            <label for="busqueda">Seleccione el indicador: </label>
 
-                                        <div class="input-group">
-                                            <select  id="busqueda" name="busqueda" aria-label="Selecciona el indice que deseas vizualizar" class="form-control">
-                                                <option value="">--- Seleccione ---</option>
-                                                <option value="0">Todos</option>
-                                                <option value="1">SPCLXIGPA</option>
-                                                <option value="2">SP IPSA</option>
-                                                <option value="3">SPCLXIN10</option>
-                                            </select>
-                                        </div>
+                                            <div class="input-group">
+                                                <select id="busqueda" name="busqueda" aria-label="Selecciona el indice que deseas vizualizar" class="form-control">
+                                                    <option value="">--- Seleccione ---</option>
+                                                    <option value="0">Todos</option>
+                                                    <option value="1">SPCLXIGPA</option>
+                                                    <option value="2">SP IPSA</option>
+                                                    <option value="3">SPCLXIN10</option>
+                                                </select>
+                                            </div>
+                                        </form>
+
                                     </div>
                                     <div class="col col-md-3">
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="row" id="espacio">
 
                     <div class="col-lg-12">
@@ -121,9 +117,32 @@
                     </div>
                 </div>
 
+                <div class="clearfix">
+                    <div class="modal fade show" id="mediumModal2" tabindex="-1" role="dialog" style="display: block" aria-labelledby="mediumModalLabel" aria-hidden="false">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Access Token</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        Escribe el ACCESS-TOKEN para la API de la bolsa nacional.
+                                    </p>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" minlength="32" maxlength="32" id="key" name="key" />
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" id="subi" disabled class="btn btn-primary">CONFIRMAR</button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-
-                <div class="clearfix"></div>
+                </div>
                 <!-- Orders -->
                 <div class="orders">
                 </div>
@@ -192,21 +211,40 @@
                 var var2=0;
                 var var3=0;
 
-            $.ajax({
+            $("#key").keyup(function(){
+                var val=$(this).val().length;
+                if(val<=31){
+                    $("#subi").prop('disabled',true);
+                }else if(val>=33){
+                    $("#subi").prop('disabled',true);
+                }else{
+                    $("#subi").prop('disabled',false);
+                }
+            });
+
+
+            $("#subi").click(function() {
+                var val = $("#key").val();
+
+                $.ajax({
                     type: "POST",
-                    url: "consulta.php",
+                    url: "https://startup.bolsadesantiago.com/api/consulta/TickerOnDemand/getIndices?access_token="+val,
+                    dataType: "json",
                     success: function (respuesta) {
-                        if(respuesta){
+                        if(respuesta) {
+                            $('#mediumModal2').css('display', 'none');
+                            $('#mediumModal2').removeClass('show');
+
                             $.each(respuesta, function(i, item) {
                                 $.each(item, function(y, item2) {
-                                    if(y==='0'){
+                                    if(y === 0){
                                         n1=item[0].Nombre;
                                         v1=item[0].Valor;
                                         ma1=item[0].Mayor;
                                         me1=item[0].Menor;
                                         med1=item[0].Medio;
                                         var1=item[0].Variacion;
-                                    }else if(y==='1'){
+                                    }else if(y === 1){
                                         n2=item[1].Nombre;
                                         v2=item[1].Valor;
                                         ma2=item[1].Mayor;
@@ -223,9 +261,15 @@
                                     }
                                 });
                             });
+                        }else{
+                            alert("Token rechazado");
+                            location.reload();
                         }
                     }
+                });
             });
+
+
 
             $("#busqueda").change(function(){
                var val=$(this).val();
