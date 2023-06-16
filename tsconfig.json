@@ -1,0 +1,28 @@
+{
+  "listaResult": [
+    {
+    "Nombre": "SPCLXIGPA",
+    "Valor": 29288.54,
+    "Mayor": 29331.38,
+    "Menor": 29225.11,
+    "Medio": 0,
+    "Variacion": 0.09
+    },
+    {
+    "Nombre": "SP IPSA",
+    "Valor": 5721.26,
+    "Mayor": 5729.87,
+    "Menor": 5710.6,
+    "Medio": 0,
+    "Variacion": 0.09
+    },
+    {
+    "Nombre": "SPCLXIN10",
+    "Valor": 7615.19,
+    "Mayor": 7636.47,
+    "Menor": 7584.3,
+    "Medio": 0,
+    "Variacion": 0.01
+    }
+  ]
+}

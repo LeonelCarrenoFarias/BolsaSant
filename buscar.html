@@ -1,0 +1,268 @@
+<?php
+
+?>
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BOLSA DE SANTIAGO - indices</title>
+    <meta name="description" content="indices">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('input.star').rating();
+        });
+    </script>
+
+
+</head>
+
+<body>
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class=" menu-item"><a href="grafico.html"><i style="margin-top: -2px;" class="menu-icon fa fa-dashboard fa-2x" ></i>Indicadores Graficos</a></li><!-- /.menu-title -->
+                    <li class="active menu-item"><a href="buscar.html"><i style="margin-top: -2px;" class="menu-icon fa fa-search fa-2x" ></i>Indices</a></li><!-- /.menu-title -->
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+    <!-- /#left-panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel" >
+        <!-- Header-->
+        <header id="header" class="header">
+
+        </header>
+        <!-- /#header -->
+        <div class="breadcrumbs">
+
+        </div>
+        <!-- Content -->
+        <div class="content">
+            <!-- Animated -->
+            <div class="animated fadeIn">
+                <!-- Widgets  -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row form-group-lg">
+                                    <div class="col col-md-3">
+                                    </div>
+                                    <div class="col col-md-6">
+                                        <label for="busqueda">Seleccione el indicador: </label>
+
+                                        <div class="input-group">
+                                            <select  id="busqueda" name="busqueda" aria-label="Selecciona el indice que deseas vizualizar" class="form-control">
+                                                <option value="">--- Seleccione ---</option>
+                                                <option value="0">Todos</option>
+                                                <option value="1">SPCLXIGPA</option>
+                                                <option value="2">SP IPSA</option>
+                                                <option value="3">SPCLXIN10</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col col-md-3">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="espacio">
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Indicadores</strong>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Mayor</th>
+                                        <th scope="col">Menor</th>
+                                        <th scope="col">Medio</th>
+                                        <th scope="col">Variación</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="contenido">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="clearfix"></div>
+                <!-- Orders -->
+                <div class="orders">
+                </div>
+            </div>
+            <!-- .animated -->
+        </div>
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <footer class="site-footer">
+
+        </footer>
+        <!-- /.site-footer -->
+    </div>
+    <!-- /#right-panel -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+    <script src="assets/js/init/fullcalendar-init.js"></script>
+
+    <!--Local Stuff-->
+
+    <script>
+
+        jQuery(document).ready(function($) {
+
+                var n1=0;
+                var n2=0;
+                var n3=0;
+
+                var v1=0;
+                var v2=0;
+                var v3=0;
+
+                var ma1=0;
+                var ma2=0;
+                var ma3=0;
+
+                var me1=0;
+                var me2=0;
+                var me3=0;
+
+                var med1=0;
+                var med2=0;
+                var med3=0;
+
+                var var1=0;
+                var var2=0;
+                var var3=0;
+
+            $.ajax({
+                    type: "POST",
+                    url: "consulta.php",
+                    success: function (respuesta) {
+                        if(respuesta){
+                            $.each(respuesta, function(i, item) {
+                                $.each(item, function(y, item2) {
+                                    if(y==='0'){
+                                        n1=item[0].Nombre;
+                                        v1=item[0].Valor;
+                                        ma1=item[0].Mayor;
+                                        me1=item[0].Menor;
+                                        med1=item[0].Medio;
+                                        var1=item[0].Variacion;
+                                    }else if(y==='1'){
+                                        n2=item[1].Nombre;
+                                        v2=item[1].Valor;
+                                        ma2=item[1].Mayor;
+                                        me2=item[1].Menor;
+                                        med2=item[1].Medio;
+                                        var2=item[1].Variacion;
+                                    }else{
+                                        n3=item[2].Nombre;
+                                        v3=item[2].Valor;
+                                        ma3=item[2].Mayor;
+                                        me3=item[2].Menor;
+                                        med3=item[2].Medio;
+                                        var3=item[2].Variacion;
+                                    }
+                                });
+                            });
+                        }
+                    }
+            });
+
+            $("#busqueda").change(function(){
+               var val=$(this).val();
+               if(val===""){
+                   $("#contenido").empty();
+               }else if(val==="0"){
+                   $("#contenido").empty();
+                   var txt1='<tr><th scope="row">1</th><td>'+n1+'</td><td>'+v1+'</td><td>'+ma1+'</td><td>'+me1+'</td><td>'+med1+'</td><td>'+var1+'</td> </tr>';
+                   var txt2='<tr><th scope="row">2</th><td>'+n2+'</td><td>'+v2+'</td><td>'+ma2+'</td><td>'+me2+'</td><td>'+med2+'</td><td>'+var2+'</td> </tr>';
+                   var txt3='<tr><th scope="row">3</th><td>'+n3+'</td><td>'+v3+'</td><td>'+ma3+'</td><td>'+me3+'</td><td>'+med3+'</td><td>'+var3+'</td> </tr>';
+                   $("#contenido").append(txt1);
+                   $("#contenido").append(txt2);
+                   $("#contenido").append(txt3);
+               }else if(val==="1"){
+                   $("#contenido").empty();
+                   var txt1='<tr><th scope="row">1</th><td>'+n1+'</td><td>'+v1+'</td><td>'+ma1+'</td><td>'+me1+'</td><td>'+med1+'</td><td>'+var1+'</td> </tr>';
+
+                   $("#contenido").append(txt1);
+
+               }else if(val==="2"){
+                   $("#contenido").empty();
+                   var txt2='<tr><th scope="row">2</th><td>'+n2+'</td><td>'+v2+'</td><td>'+ma2+'</td><td>'+me2+'</td><td>'+med2+'</td><td>'+var2+'</td> </tr>';
+                   $("#contenido").append(txt2);
+               }else if(val==="3"){
+                   $("#contenido").empty();
+                   var txt3='<tr><th scope="row">3</th><td>'+n3+'</td><td>'+v3+'</td><td>'+ma3+'</td><td>'+me3+'</td><td>'+med3+'</td><td>'+var3+'</td> </tr>';
+                   $("#contenido").append(txt3);
+               }else{
+                   $("#contenido").empty();
+
+               }
+
+
+            });
+
+        });
+    </script>
+</body>
+
+
